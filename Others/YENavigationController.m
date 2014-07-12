@@ -46,8 +46,6 @@
     
     // 5.设置状态栏样式
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    // 他的Freame是320*480
-    //    NSLog(@"%s Navigation的Frame:%@", __FUNCTION__,     NSStringFromCGRect(self.view.frame));
 }
 
 - (void)didReceiveMemoryWarning
