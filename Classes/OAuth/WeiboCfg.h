@@ -12,7 +12,7 @@
 
 #define kAppKey @"959738761"
 #define kRedirectURI @"http://www.baidu.com"
-#define kAppSecret @"37c372aa97a9329fc561947151c1bd38"
+#define kAppSecret @"e67d8f594888746df6e18f7c7ccbd73e"
 
 #define kBaseURL @"https://api.weibo.com"
 

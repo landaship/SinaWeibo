@@ -155,21 +155,20 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.enabled = NO;  // 取消按钮响应事件
     btn.adjustsImageWhenDisabled = NO;  // 防止按下的时候按钮变颜色
-    NSString *title = count ? [NSString stringWithFormat:@"更新了%d 条微博", count]:@"当前没有新微博";
     
+    // 设置标题
+    NSString *title = count ? [NSString stringWithFormat:@"更新了%d 条微博", count]:@"当前没有新微博";
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    CGFloat width = self.view.bounds.size.width;
-    
-    NSLog(@"width:%f", width);
-    
-    CGFloat height = kShowNewStatusButtonH;
-    btn.frame = CGRectMake(0, 44 - height, 320, kShowNewStatusButtonH);
+  
+    //设置背景图片
     [btn setBackgroundImage:[UIImage stretchImage:@"timeline_new_status_background.png"] forState:UIControlStateNormal];
 
-//    btn.backgroundColor = [UIColor greenColor];
-    [self.navigationController.view insertSubview:btn belowSubview:self.navigationController.navigationBar];
-    
+    // 设置更新下拉条的Frame  一定要设置完背景神马之后才能设置frame，否则背景加载不出来
+    CGFloat width = self.view.bounds.size.width;
+    CGFloat y = self.navigationController.navigationBar.frame.size.height;
+    btn.frame = CGRectMake(0,  y -  kShowNewStatusButtonH + 20, width, kShowNewStatusButtonH);
+
     // 动画显示
     NSTimeInterval timeInteral = 0.5;
     [UIView animateWithDuration:timeInteral animations:^{
@@ -181,6 +180,8 @@
            [btn removeFromSuperview];
         }];
     }];
+    
+    [self.navigationController.view insertSubview:btn belowSubview:self.navigationController.navigationBar];
 }
 
 #pragma mark 加载用户数据
