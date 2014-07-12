@@ -7,6 +7,7 @@
 //
 
 #import "MeViewController.h"
+#import "UIImage+YE.h"
 
 @interface MeViewController ()
 
@@ -26,7 +27,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor greenColor];
+    // 构建显示的button
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.enabled = NO;  // 取消按钮响应事件
+    btn.adjustsImageWhenDisabled = NO;  // 防止按下的时候按钮变颜色
+    NSString *title = @"当前没有新微博";
+    
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    CGFloat width = self.view.bounds.size.width;
+    CGFloat y = self.navigationController.navigationBar.frame.size.height;
+    [btn setBackgroundImage:[UIImage stretchImage:@"timeline_new_status_background.png"] forState:UIControlStateNormal];
+
+    // 设置更新下拉条的Frame
+    btn.frame = CGRectMake(0,  y , width, 34);
+      [self.view addSubview:btn];
+    
 }
 
 - (void)didReceiveMemoryWarning
