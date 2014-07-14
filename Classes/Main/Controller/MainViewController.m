@@ -15,6 +15,8 @@
 #import "SquareViewController.h"
 #import "MoreViewController.h"
 #import "YENavigationController.h"
+#import "TestViewController.h"
+#import "UIBarButtonItem+YE.h"
 
 @interface MainViewController ()
 
@@ -36,8 +38,8 @@
 - (void)addAllChildControllers
 {
     // 1.首页
-    HomeViewController *home = [[HomeViewController alloc] init];
-    //    TestViewController *home = [[TestViewController alloc]init];
+    HomeViewController *home = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
+//    TestViewController *home = [[TestViewController alloc]init];`
 
     YENavigationController *nav1 = [[YENavigationController alloc] initWithRootViewController:home];
     nav1.delegate = self;
@@ -107,30 +109,68 @@
 #pragma mark - 即将推出下一个VC
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    // 1. get the root vc
     UIViewController  *root = navigationController.viewControllers[0];
-    if ([viewController isKindOfClass:[root class]]) { // 如果是主页VC，则Dock不动
-        // 拉伸frame
-        CGRect rect = navigationController.view.frame;
-        rect.size.height =  [UIScreen mainScreen].applicationFrame.size.height - _dock.frame.size.height + 20;
+    if (viewController != root) { // 如果是根VC，则Dock不动
+        // 拉长控制器
+        CGRect viewFrame = navigationController.view.frame;
+        viewFrame.size.height = [UIScreen mainScreen].applicationFrame.size.height + 20;
+        navigationController.view.frame = viewFrame;
         
-        NSLog(@"－－rect:%@", NSStringFromCGRect(rect));
-        navigationController.view.frame = rect;
+        navigationController.view.backgroundColor = [UIColor redColor];
+        
+        // 2. remove the dock from the mainVC
+        [_dock removeFromSuperview];
+        
+        // 3. adjust the dock frame
+        CGRect dockFrame = _dock.frame;
+//        //dockFrame.origin.y =  navigationController.view.frame.size.height - _dock.frame.size.height;
+        if ([root.view isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *scrollView = (UIScrollView *)root.view;
+            
+#pragma mark 郁闷这个为什么要这么加才有效果
+            dockFrame.origin.y += scrollView.contentOffset.y -20 - 44;
+        }
+        _dock.frame = dockFrame;
+        
+        //4. add the dock to the new viewController
+        [root.view addSubview:_dock];
+        
+        // 5. add return back item
+        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_back.png" highlightedIcon:@"navigationbar_back_highlighted" target:self action:@selector(returnBack)];
     }
-    else
-    {
-        // 拉伸frame
-        CGRect rect = navigationController.view.frame;
-        rect.size.height = [UIScreen mainScreen].applicationFrame.size.height + 20;
+}
 
-        NSLog(@"＋＋rect:%@", NSStringFromCGRect(rect));
-        navigationController.view.frame = rect;
-    }
+#pragma mark - 返回上一页
+- (void) returnBack
+{
+    [self.childViewControllers[_dock.selectIndex] popViewControllerAnimated:YES];
 }
 
 #pragma mark - 已经推出下一个VC
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-
+    // 1. get the root vc
+    UIViewController  *root = navigationController.viewControllers[0];
+    if (viewController == root) { // 如果是根VC，则Dock还原
+        
+        // 缩短控制器
+        CGRect viewFrame = navigationController.view.frame;
+#pragma mark 这个20到底是什么？
+        viewFrame.size.height = [UIScreen mainScreen].applicationFrame.size.height - _dock.frame.size.height  + 20;
+        navigationController.view.frame = viewFrame;
+        
+        // 2. remove the dock from the mainVC
+        [_dock removeFromSuperview];
+        
+        // 3. adjust the dock frame
+        CGRect dockFrame = _dock.frame;
+        dockFrame.origin.y =  self.view.frame.size.height - 44;
+        _dock.frame = dockFrame;
+        
+        //4. add the dock to the new viewController
+        [self.view addSubview:_dock];
+    }
 }
 
 

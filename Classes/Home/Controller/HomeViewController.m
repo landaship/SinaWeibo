@@ -45,6 +45,9 @@
     self.view.backgroundColor = [UIColor clearColor];
 }
 
+#pragma mark 重写这个方法的目的。去掉父类默认的操作：显示滚动条
+- (void)viewDidAppear:(BOOL)animated { }
+
 #pragma mark 设置界面
 - (void)setUIView
 {

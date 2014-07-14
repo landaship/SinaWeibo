@@ -34,16 +34,6 @@
     // 0. 设置标题
     self.title = @"微博正文";
     
-    // 1. 修改返回按钮
-    UIButton *gobackBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *btnBGImg = [UIImage imageNamed:@"navigationbar_back.png"];
-    [gobackBtn setImage:btnBGImg forState:UIControlStateNormal];
-    [gobackBtn setImage:[UIImage imageNamed:@"navigationbar_back_highlighted"] forState:UIControlStateHighlighted];
-    gobackBtn.frame = CGRectMake(0, 0, btnBGImg.size.width, btnBGImg.size.height);
-    [gobackBtn addTarget:self action:@selector(goBackClick) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc]initWithCustomView:gobackBtn];
-    self.navigationItem.leftBarButtonItem = leftBarItem;
-    
     // 2.让Dock一起返回和消失
            // 在MainViewController里实现
     
@@ -52,6 +42,9 @@
     
     self.view.backgroundColor = kHomeViewBackGroundColor;
 }
+
+#pragma mark 重写这个方法的目的。去掉父类默认的操作：显示滚动条
+- (void)viewDidAppear:(BOOL)animated { }
 
 #pragma mark - addToolBarVIew
 - (void) addToolBarVIew
@@ -83,12 +76,6 @@
     
     // 3.添加到主视图
     [self.view addSubview:toolBarView];
-}
-
-#pragma mark - 返回上一页
-- (void) goBackClick
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

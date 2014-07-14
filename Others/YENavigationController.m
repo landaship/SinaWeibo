@@ -19,7 +19,7 @@
     [super viewDidLoad];
     
     // 2.设置导航栏的背景图片 --背景图片高度不对导致的那个现象
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_background.png"] forBarMetrics:UIBarMetricsDefault];
+    //    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_background.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.translucent = NO;
 
     // 3.设置导航栏文字的主题
@@ -45,12 +45,17 @@
 //    [barItem setTitleTextAttributes:dict forState:UIControlStateHighlighted];
     
     // 5.设置状态栏样式
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+-(BOOL)prefersStatusBarHidden
+{
+    return NO;
 }
 
 @end

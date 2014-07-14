@@ -21,6 +21,7 @@
 
 // 代理
 @property (weak, nonatomic) id <DockDelegate>  delegate;
+@property (nonatomic, assign) NSInteger selectIndex;
 
 - (void) setFocusItem:(NSInteger) itemNum;
 

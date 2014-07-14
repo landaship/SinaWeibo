@@ -47,6 +47,7 @@
 - (void) setFocusItem:(NSInteger) itemNum
 {
      DockItem *dockItem = self.subviews[itemNum];
+    self.selectIndex = itemNum;
      [self itemClick:dockItem];
 }
 

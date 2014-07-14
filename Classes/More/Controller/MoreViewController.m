@@ -31,6 +31,7 @@
 #import "MoreViewController.h"
 #import "UIImage+YE.h"
 #import "CustomCell.h"
+#import "AccountsController.h"
 
 @interface MoreViewController () <UIActionSheetDelegate>
 {
@@ -39,15 +40,7 @@
 
 @end
 
-@implementation MoreViewController 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation MoreViewController
 
 - (void)viewDidLoad
 {
@@ -82,7 +75,7 @@
     [footButon setImage:[UIImage stretchImage:@"common_button_big_red_highlighted.png"] forState:UIControlStateSelected];
     
     //   记住button里frame的with不由你控制，你填写多少都是320
-    footButon.frame = CGRectMake(0, 0, 1000, 44);
+    footButon.bounds = CGRectMake(0, 0, 1000, 44);
     // 设置边距
     //    footButon.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [footButon setTitle:@"退出当前账号" forState:UIControlStateNormal];
@@ -115,15 +108,13 @@
 - (void)readPlistData
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"More" ofType:@"plist"];
-    //    NSDictionary *dict = [[NSDictionary alloc]initWithContentsOfFile:path];
-    //    _data = [dict allKeys];
     _data = [NSArray arrayWithContentsOfFile:path];
 }
 
 #pragma mark 设置多少个section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView              // Default is 1 if not implemented
 {
-    NSLog(@"count ...:%d", _data.count);
+       NSLog(@"_data.count:%d", _data.count);
     return _data.count;
 }
 
@@ -155,10 +146,10 @@
         cell.accessoryViewStyle = kAccessoryViewStyleLable;
         cell.accessoryViewLable.text = indexPath.row?@"经典模式":@"有图模式";
     }
-    else if (indexPath.section ==  0)
-    {
-        cell.AccessoryViewStyle = kAccessoryViewStyleSwith;
-    }
+//    else if (indexPath.section ==  0)
+//    {
+//        cell.AccessoryViewStyle = kAccessoryViewStyleSwith;
+//    }
     else
     {
         cell.accessoryViewStyle = kAccessoryViewStyleArrows;
@@ -170,7 +161,7 @@
 #pragma mark 设置section里有多少行
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    NSLog(@" [_data[section] count] ...:%d",  [_data[section] count]);
+    NSLog(@"_data[section] count:%d", [_data[section] count]);
     return [_data[section] count];
 }
 
@@ -180,6 +171,17 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSLog(@"section:%d row:%d", indexPath.section, indexPath.row);
+    
+#warning mark - 我草，这个为什么section的值会计算错误！！！！
+    if (indexPath.section == 1) { // select the accout manage button
+        AccountsController *accountVC = [[AccountsController alloc]init];
+        [self.navigationController pushViewController:accountVC animated:YES];
+    }
+}
 /*
 #pragma mark - Navigation
 
