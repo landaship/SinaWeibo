@@ -43,3 +43,24 @@
 #define kScreenNameColor kColor(93, 93, 93)
 // 转发微博昵称颜色
 #define kReweetedScreeNameColor kColor(63, 104, 161)
+
+// 全局的背景色
+#define kGlobalBg kColor(230, 230, 230)
+
+// 设置tableView的边框宽度
+#define kTableBorderWidth 8
+
+// 设置转发微博dock的高度
+#define kRetweetedDockHeight 35
+
+// 7.图片
+// 会员皇冠图标
+#define kMBIconW 14
+#define kMBIconH 14
+
+#define kRetweetedScreenNameFont [UIFont systemFontOfSize:13]
+
+#define kRetweetedTextFont [UIFont systemFontOfSize:13]
+
+// 转发微博用户昵称的颜色
+#define kRetweetedScreenNameColor kColor(63, 104, 161)

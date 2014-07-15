@@ -1,0 +1,22 @@
+//
+//  StatusDetailFrame.m
+//  新浪微博
+//
+//  Created by apple on 13-11-5.
+//  Copyright (c) 2013年 itcast. All rights reserved.
+//
+
+#import "StatusDetailCellFrame.h"
+#import "Status.h"
+
+@implementation StatusDetailCellFrame
+- (void)setStatus:(Status *)status
+{
+    [super setStatus:status];
+    
+    if (status.retweeted_status) {
+        _retweetedFrame.size.height += kRetweetedDockHeight;
+        _cellHeight += kRetweetedDockHeight;
+    }
+}
+@end

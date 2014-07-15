@@ -298,7 +298,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DetailViewController *detailVC = [[DetailViewController alloc]init];
-
+    StatusFrame *f = _statusFrameArrary[indexPath.row];
+    detailVC.status = f.Status;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

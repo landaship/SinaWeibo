@@ -27,7 +27,11 @@ typedef enum {
     kAvatarTypeBig // 80*80大图标
 } AvatarType;
 
+@class User;
 @interface Avatar : UIView
+
+@property (nonatomic, strong) User *user;
+@property (nonatomic, assign) AvatarType type;
 
 - (void)setUser:(User *)user type:(AvatarType) type;
 +(CGSize) avatarSizeWithType:(AvatarType)type;
