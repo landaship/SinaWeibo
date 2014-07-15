@@ -6,9 +6,7 @@
 //  Copyright (c) 2014年 Louis. All rights reserved.
 // 用户模型
 
-#import <Foundation/Foundation.h>
-
-@interface User : NSObject
+#import "BaseModel.h"
 
 typedef enum {
     kVerifiedTypeNone = - 1, // 没有认证
@@ -25,13 +23,12 @@ typedef enum {
     kMBTypeYear // 年费
 } MBType;
 
-- (User *) initWithDict:(NSDictionary *)dict;
-
-@property (nonatomic, copy)NSString *profile_image_url;  //用户头像地址（中图），50×50像素
-@property (nonatomic, copy)NSString *screen_name; //用户昵称
-@property (nonatomic, assign)BOOL verified; //是否是微博认证用户，即加V用户，true：是，false：否
-@property (nonatomic, assign)VerifiedType verified_type; // 认证类型 3 企业认证
-@property (nonatomic, assign) MBType mbrank; // 会员等级
-@property (nonatomic, assign) int mbtype; // 会员类型
-
+@interface User : BaseModel
+@property (nonatomic, copy) NSString *screenName;  //用户昵称
+@property (nonatomic, copy) NSString *profileImageUrl;  //用户头像地址（中图），50×50像素
+@property (nonatomic, assign) BOOL verified; //是否是微博认证用户，即加V用户
+@property (nonatomic, assign) VerifiedType verifiedType; // 认证类型
+@property (nonatomic, assign) int mbrank; // 会员等级
+@property (nonatomic, assign) MBType mbtype; // 会员类型
 @end
+

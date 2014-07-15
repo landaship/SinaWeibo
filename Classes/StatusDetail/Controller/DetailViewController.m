@@ -263,7 +263,7 @@
                            success:^(NSArray *reposts, int totoalNumber, long long nextCursor) {
                                 // 1.解析最新的转发frame数据
                                 NSMutableArray *newFrames = [self framesWithModels:reposts class:[RepostCellFrame class]];
-                                _status.reposts_count = totoalNumber;
+                                _status.repostsCount = totoalNumber;
                                 
                                 // 2.添加数据
                                 [_repostFrames insertObjects:newFrames atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newFrames.count)]];
@@ -291,7 +291,7 @@
         //            [newFrames addObject:f];
         //        }
         
-        _status.comments_count = totalNumber;
+        _status.commentsCount = totalNumber;
         
         // 2.添加数据到旧数据的前面
         [_commentFrames insertObjects:newFrames atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newFrames.count)]];
@@ -317,7 +317,7 @@
         //            [newFrames addObject:f];
         //        }
         
-        _status.reposts_count = totalNumber;
+        _status.repostsCount = totalNumber;
         
         // 2.添加数据到旧数据的后面
         [_repostFrames addObjectsFromArray:newFrames];
@@ -347,7 +347,7 @@
         //            [newFrames addObject:f];
         //        }
         
-        _status.comments_count = totalNumber;
+        _status.commentsCount = totalNumber;
         
         // 2.添加数据到旧数据的后面
         [_commentFrames addObjectsFromArray:newFrames];

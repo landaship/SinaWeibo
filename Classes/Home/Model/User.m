@@ -9,20 +9,17 @@
 #import "User.h"
 
 @implementation User
-
--(User *)initWithDict:(NSDictionary *)dict
+- (id)initWithDict:(NSDictionary *)dict
 {
-    if (self = [super init])
-    {
-        self.screen_name = dict[@"screen_name"];
-        self.profile_image_url = dict[@"profile_image_url"];
-        self.verified = [dict[@"verified"]intValue];
-        self.verified_type =  [dict[@"verified_type"]intValue];
-        self.mbrank =  [dict[@"mbrank"]intValue];
-        self.mbtype =  [dict[@"mbtype"]intValue];
+    if (self = [super initWithDict:dict]) {
+        self.screenName = dict[@"screen_name"];
+        self.profileImageUrl = dict[@"profile_image_url"];
+        
+        self.verified = [dict[@"verified"] boolValue];
+        self.verifiedType = [dict[@"verified_type"] intValue];
+        self.mbrank = [dict[@"mbrank"] intValue];
+        self.mbtype = [dict[@"mbtype"] intValue];
     }
-    
     return self;
 }
-
 @end

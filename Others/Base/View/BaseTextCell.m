@@ -56,7 +56,7 @@
     
     // 2.昵称
     _screenName.frame = cellFrame.screenNameFrame;
-    _screenName.text = baseText.user.screen_name;
+    _screenName.text = baseText.user.screenName;
     
     // 3.判断是不是会员
     if (baseText.user.mbtype == kMBTypeNone) {

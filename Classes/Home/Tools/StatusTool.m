@@ -4,7 +4,7 @@
 //
 //  Created by Louis on 14-7-2.
 //  Copyright (c) 2014年 Louis. All rights reserved.
-//
+//  封装调用 AFNetworking
 
 #import "StatusTool.h"
 #import "HttpTools.h"
@@ -18,7 +18,6 @@
 {
     [HttpTools getWithPath:@"2/statuses/home_timeline.json"
                      param:@{
-                             @"access_token": [AccountTool sharedAccountTool].account.accessToken,
                              @"count":@5,
                              @"since_id":@(sinceID),
                              @"max_id":@(maxID)

@@ -118,7 +118,7 @@
     
     // 2.昵称
     _screenName.frame = cellFrame.screenNameFrame;
-    _screenName.text = s.user.screen_name;
+    _screenName.text = s.user.screenName;
     // 判断是不是会员
     if (s.user.mbtype == kMBTypeNone) {
         _screenName.textColor = kScreenNameColor;
@@ -130,7 +130,7 @@
     }
     
     // 3.时间
-    _time.text = s.created_at;
+    _time.text = s.createdAt;
     CGFloat timeX = cellFrame.screenNameFrame.origin.x;
     CGFloat timeY = CGRectGetMaxY(cellFrame.screenNameFrame) + kCellBorderWidth;
     CGSize timeSize = [_time.text sizeWithFont:kTimeFrameFont];
@@ -148,35 +148,35 @@
     _text.text = s.text;
     
     // 6.配图
-    if (s.pic_urls.count) {
+    if (s.picUrls.count) {
         _image.hidden = NO;
         _image.frame = cellFrame.imageFrame;
-        _image.pictures = s.pic_urls;
+        _image.pictures = s.picUrls;
     } else {
         _image.hidden = YES;
     }
     
     // 7.被转发微博
-    if (s.retweeted_status) {
+    if (s.retweetedStatus) {
         _retweeted.hidden = NO;
         
         _retweeted.frame = cellFrame.retweetedFrame;
         
         // 8.昵称
         _retweetedScreenName.frame = cellFrame.retweetedScreenNameFrame;
-        _retweetedScreenName.text = [NSString stringWithFormat:@"@%@", s.retweeted_status.user.screen_name];
+        _retweetedScreenName.text = [NSString stringWithFormat:@"@%@", s.retweetedStatus.user.screenName];
         
         // 9.内容
         _retweetedText.frame = cellFrame.retweetedTextFrame;
-        _retweetedText.text = s.retweeted_status.text;
+        _retweetedText.text = s.retweetedStatus.text;
         
         // 10.配图
-        if (s.retweeted_status.pic_urls.count) {
+        if (s.retweetedStatus.picUrls.count) {
             _retweetedImage.hidden = NO;
             
             _retweetedImage.frame = cellFrame.retweetedImageFrame;
             
-            _retweetedImage.pictures = s.retweeted_status.pic_urls;
+            _retweetedImage.pictures = s.retweetedStatus.picUrls;
         } else {
             _retweetedImage.hidden = YES;
         }

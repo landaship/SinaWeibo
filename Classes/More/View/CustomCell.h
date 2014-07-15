@@ -6,7 +6,8 @@
 //  Copyright (c) 2014年 Louis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseCell.h"
+
 typedef enum
 {
     kAccessoryViewStyleNone,            // 无样式
@@ -15,7 +16,7 @@ typedef enum
     kAccessoryViewStyleSwith              // 开关
 }AccessoryViewStyle;
 
-@interface CustomCell : UITableViewCell
+@interface CustomCell : BaseCell
 
 @property (nonatomic, readonly) UISwitch *accessoryViewSwitch;
 @property (nonatomic, readonly) UILabel *accessoryViewLable;

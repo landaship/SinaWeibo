@@ -28,7 +28,7 @@
     // 2.昵称
     CGFloat screenNameX = CGRectGetMaxX(_iconFrame) + kCellBorderWidth;
     CGFloat screenNameY = iconY;
-    CGSize screenNameSize = [baseText.user.screen_name sizeWithFont:kScreenNameFont];
+    CGSize screenNameSize = [baseText.user.screenName sizeWithFont:kScreenNameFont];
     _screenNameFrame = (CGRect){{screenNameX, screenNameY}, screenNameSize};
     
     // 会员图标

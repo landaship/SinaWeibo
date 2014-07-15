@@ -45,12 +45,12 @@
     _user = user;
     
     // 1.设置头像图片
-    [HttpTools setImageWithURL:[NSURL URLWithString:user.profile_image_url] placeholderImage:_placeHolder addToView:_avatarView];
+    [HttpTools setImageWithURL:[NSURL URLWithString:user.profileImageUrl] placeholderImage:_placeHolder addToView:_avatarView];
     
     // 2.设置认证图标
      _vertifyView.hidden = YES;
     if (user.verified) {
-        switch (user.verified_type) {
+        switch (user.verifiedType) {
             case kVerifiedTypeNone:
                 break;
             case kVerifiedTypePersonal:

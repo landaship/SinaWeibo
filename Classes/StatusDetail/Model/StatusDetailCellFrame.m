@@ -14,7 +14,7 @@
 {
     [super setStatus:status];
     
-    if (status.retweeted_status) {
+    if (status.retweetedStatus) {
         _retweetedFrame.size.height += kRetweetedDockHeight;
         _cellHeight += kRetweetedDockHeight;
     }

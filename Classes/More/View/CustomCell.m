@@ -11,8 +11,6 @@
 
 @interface CustomCell()
 {
-    UIImageView *_cellBackGround ;
-    UIImageView *_cellSelectBackGround ;
     UIImageView *_arrow;
 }
 
@@ -24,12 +22,11 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _cellBackGround = [[UIImageView alloc]init];
-        _cellSelectBackGround  = [[UIImageView alloc]init];
-        
-        self.backgroundView = _cellBackGround;
-        self.selectedBackgroundView = _cellSelectBackGround;
+        // 2.清空label的背景色
+        self.textLabel.backgroundColor = [UIColor clearColor];
+        self.textLabel.highlightedTextColor = self.textLabel.textColor;
     }
+    
     return self;
 }
 
@@ -41,8 +38,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 -(void)setIndexPath:(NSIndexPath *)indexPath
@@ -52,23 +47,23 @@
     
     if (count == 1)
     {
-        _cellBackGround.image = [UIImage stretchImage:@"common_card_background.png"];
-        _cellSelectBackGround.image =  [UIImage stretchImage:@"common_card_background_highlighted.png"];
+        _bg.image = [UIImage stretchImage:@"common_card_background.png"];
+        _selectedBg.image =  [UIImage stretchImage:@"common_card_background_highlighted.png"];
     }
     else if (indexPath.row == 0 )
     {
-        _cellBackGround.image = [UIImage stretchImage:@"common_card_top_background.png"];
-        _cellSelectBackGround.image =  [UIImage stretchImage:@"common_card_top_background_highlighted.png"];
+        _bg.image = [UIImage stretchImage:@"common_card_top_background.png"];
+        _selectedBg.image =  [UIImage stretchImage:@"common_card_top_background_highlighted.png"];
     }
     else if (indexPath.row == count - 1)
     {
-        _cellBackGround.image = [UIImage stretchImage:@"common_card_bottom_background.png"];
-        _cellSelectBackGround.image =  [UIImage stretchImage:@"common_card_bottom_background_highlighted.png"];
+        _bg.image = [UIImage stretchImage:@"common_card_bottom_background.png"];
+        _selectedBg.image =  [UIImage stretchImage:@"common_card_bottom_background_highlighted.png"];
     }
     else
     {
-        _cellBackGround.image = [UIImage stretchImage:@"common_card_middle_background.png"];
-        _cellSelectBackGround.image =  [UIImage stretchImage:@"common_card_middle_background_highlighted.png"];
+        _bg.image = [UIImage stretchImage:@"common_card_middle_background.png"];
+        _selectedBg.image =  [UIImage stretchImage:@"common_card_middle_background_highlighted.png"];
     }
 }
 

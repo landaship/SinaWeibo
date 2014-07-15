@@ -10,12 +10,29 @@
 #import "AFNetworking.h"
 #import "WeiboCfg.h"
 #import "UIImageView+WebCache.h"
+#import "AccountTool.h"
 
 @implementation HttpTools
 +(void)requestWithPath:(NSString *)path param:(NSDictionary *)param success:(HttpSuccessBlock)success failure:(HttpFailureBlock)failure method:(NSString *)method
 {
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:kBaseURL]];
-    NSURLRequest *post = [client requestWithMethod:method path:path parameters:param];
+    
+    // 拼接传进来的参数
+    NSMutableDictionary *allParams = [NSMutableDictionary dictionary];
+    if (param) {
+        [allParams setDictionary:param];
+    }
+    
+    // 拼接token参数
+    NSString *token = [AccountTool sharedAccountTool].account.accessToken;
+    if (token) {
+        [allParams setObject:token forKey:@"access_token"];
+    }
+
+    NSURLRequest *post = [client requestWithMethod:method path:path parameters:allParams];
+    
+#pragma mark - 打印发出的请求消息
+//    NSLog(@"postString:%@", post);
     
     NSOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:post
                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)

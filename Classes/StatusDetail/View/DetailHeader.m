@@ -63,9 +63,9 @@
 {
     _status = status;
     
-    [self setBtn:_comment title:@"评论" count:status.comments_count];
-    [self setBtn:_repost title:@"转发" count:status.reposts_count];
-    [self setBtn:_attitude title:@"赞" count:status.attitudes_count];
+    [self setBtn:_comment title:@"评论" count:status.commentsCount];
+    [self setBtn:_repost title:@"转发" count:status.repostsCount];
+    [self setBtn:_attitude title:@"赞" count:status.attitudesCount];
 }
 
 - (void)setBtn:(UIButton *)btn title:(NSString *)title count:(int)count

@@ -90,7 +90,7 @@
 - (void) loadMoreStatusData:(MJRefreshBaseView *)refreshView
 {
     StatusFrame *f = [_statusFrameArrary lastObject ];
-    Status *s = f.Status;
+    Status *s = f.status;
     long long maxID = s.ID;
     
     // 为什么要－1 maxID - 1
@@ -123,7 +123,7 @@
 - (void) loadNewStatusData:(MJRefreshBaseView *)refreshView
 {
     StatusFrame *f = _statusFrameArrary.count ? _statusFrameArrary[0]: nil;
-    Status *s = f.Status;
+    Status *s = f.status;
     long long sinceID = s.ID;
     
     [StatusTool statusWithSinceID:sinceID maxID:0 Success:^(NSArray *status) {
@@ -226,71 +226,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[StatusCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-//        cell.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 + 1 green:arc4random()%256/255.0  blue:arc4random()%256/255.0  alpha:2.5];
-        
-//        cell.textLabel.numberOfLines = 0;  // 自动换行
-//        cell.textLabel.font = [UIFont systemFontOfSize:15.0];
-//        cell.detailTextLabel.font = [UIFont systemFontOfSize:13.0];
-//        cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
     }
-    
-#if 1
-    cell.statusFrame = _statusFrameArrary[indexPath.row];
-   
-#else
-    
-//    cell.textLabel.text = text;
-//    cell.detailTextLabel.text = status.user.screen_name;
-//    
-//    // 这两个的frame后来都自动变化了
-//    //    CGRect rect =  cell.textLabel.frame;
-//    //    CGRect rect2 = cell.detailTextLabel.frame;
-//    //    
-//    //    NSLog(@"rect:%@, rect2:%@", NSStringFromCGRect(rect), NSStringFromCGRect(rect2));
-//
-//    // 获取图片只能用异步的方式
-//    //    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:status.user.profile_image_url]];
-//    //    cell.imageView.image = [UIImage imageWithData:data];
-//#pragma mark - 用SDWebImage框架加载图片
-//    // 有占位图标  还有加载图片的优先级
-//    [cell.imageView setImageWithURL:[NSURL URLWithString:status.user.profile_image_url] placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
-#endif
+
+    cell.cellFrame = _statusFrameArrary[indexPath.row];
+
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    // 取出微博内容
-//    Status *s = _dataArray[indexPath.row];
-//    
-//    NSString *text = s.text;
-//    if (s.retweeted_status) {
-//        text = [text stringByAppendingString:s.retweeted_status.text];
-//    }
-//    
-//    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:15.0]};
-//
-//     // 计算微博内容高度
-//    CGSize textSize = [text
-//                        //boundingRectWithSize:tableView.bounds.size
-//                       boundingRectWithSize:CGSizeMake(220.0, 1000000)  // cell老是越界是因为这个计算值不对，宽的设置只能设置成220，否则计算出来的大小不正确，倒是显示越界
-//                        options:NSStringDrawingUsesLineFragmentOrigin
-//                        attributes:attribute
-//                        context:nil].size;
-//    
-//    CGFloat detailTextHight = [UIFont systemFontOfSize:13.0].lineHeight;
-//    
-//    // 为什么会cell重叠了 不明白因为cell的高度计算错误了
-    
-//    CGFloat cellHight = detailTextHight + textSize.height + 10;
-//
-//    return  cellHight > 70 ? cellHight:70;
- 
     return [_statusFrameArrary[indexPath.row] cellHeight];
 }
 
@@ -299,7 +247,7 @@
 {
     DetailViewController *detailVC = [[DetailViewController alloc]init];
     StatusFrame *f = _statusFrameArrary[indexPath.row];
-    detailVC.status = f.Status;
+    detailVC.status = f.status;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

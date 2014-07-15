@@ -58,7 +58,7 @@
     [super setCellFrame:cellFrame];
     
     // 设置子控件的数据
-    _dock.status = cellFrame.status.retweeted_status;
+    _dock.status = cellFrame.status.retweetedStatus;
 }
 
 @end

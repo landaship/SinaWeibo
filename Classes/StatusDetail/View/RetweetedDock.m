@@ -68,11 +68,11 @@
     _status = status;
     
     // 1.转发
-    [self setBtn:_repost title:@"0" count:status.reposts_count];
+    [self setBtn:_repost title:@"0" count:status.repostsCount];
     // 2.评论
-    [self setBtn:_comment title:@"0" count:status.comments_count];
+    [self setBtn:_comment title:@"0" count:status.commentsCount];
     // 3.赞
-    [self setBtn:_attitute title:@"0" count:status.attitudes_count];
+    [self setBtn:_attitute title:@"0" count:status.attitudesCount];
 }
 
 #pragma mark 设置按钮文字

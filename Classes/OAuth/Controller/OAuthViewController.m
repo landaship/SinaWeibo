@@ -34,11 +34,10 @@
     [super viewDidLoad];
     // 加载未授权的Request Token
     //    https://api.weibo.com/oauth2/authorize?display=mobile?display=mobile&client_id=959738761&redirect_uri=http://www.baidu.com
-    NSString *urlString = [kAuthorizeURL stringByAppendingFormat:@"?display=mobile&client_id=%@&redirect_uri=%@", kAppKey,kRedirectURI];
-
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:url];
-    [_webView loadRequest:URLRequest];
+    NSString *urlStr = [kAuthorizeURL stringByAppendingFormat:@"?display=mobile&client_id=%@&redirect_uri=%@", kAppKey, kRedirectURI];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [_webView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,15 +63,18 @@
 {
     //1. 获取请求的全路径
     NSString *requestURL = request.URL.absoluteString;
-        NSLog(@"file:%s code:%@", __FILE__, requestURL);
+    
+    NSLog(@"file:%s code:%@", __FILE__, requestURL);
     
     //2. 获取code
     NSRange codeRange = [requestURL rangeOfString:@"code="];
+    
     //    有这个code意味着什么？
     if (codeRange.length != 0)
     {
         NSInteger index = codeRange.location + codeRange.length;
         NSString *requestToken = [requestURL substringFromIndex:index];
+        
         NSLog(@"file:%s requestToken:%@", __FILE__, requestToken);
         
         [HttpTools postWithPath:@"/oauth2/access_token" param:@{

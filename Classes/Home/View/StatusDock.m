@@ -87,13 +87,13 @@
 {
     _status = status;
     
-    NSString *title = status.reposts_count ? [NSString stringWithFormat:@"%d", status.reposts_count]:@"转发";
+    NSString *title = status.repostsCount ? [NSString stringWithFormat:@"%d", status.repostsCount]:@"转发";
     [_retweetBtn setTitle:title forState:UIControlStateNormal];
     
-    title = status.comments_count ? [NSString stringWithFormat:@"%d", status.comments_count]:@"评论";
+    title = status.commentsCount ? [NSString stringWithFormat:@"%d", status.commentsCount]:@"评论";
     [_commentBtn setTitle:title forState:UIControlStateNormal];
     
-    title = status.attitudes_count ? [NSString stringWithFormat:@"%d", status.attitudes_count]:@"转发";
+    title = status.attitudesCount ? [NSString stringWithFormat:@"%d", status.attitudesCount]:@"转发";
     [_unlikeBtn setTitle:title forState:UIControlStateNormal];
 }
 @end

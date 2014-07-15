@@ -12,10 +12,13 @@
 #define kSrcName(file) [kBundleName stringByAppendingPathComponent:file]
 
 @interface  MJRefreshBaseView()
+
 // 合理的Y值
 - (CGFloat)validY;
+
 // view的类型
 - (int)viewType;
+
 @end
 
 @implementation MJRefreshBaseView
@@ -227,5 +230,23 @@
 - (void)endRefreshing
 {
     [self setState:RefreshStateNormal];
+}
+
+- (void)free
+{
+    // do nothing
+}
+
+
+// 合理的Y值
+- (CGFloat)validY
+{
+    return MAX(_scrollView.contentSize.height, _scrollView.frame.size.height) - _scrollView.frame.size.height;
+}
+
+// view的类型
+- (int)viewType
+{
+    return RefreshViewTypeFooter;
 }
 @end
